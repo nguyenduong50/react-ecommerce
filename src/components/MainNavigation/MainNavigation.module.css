@@ -1,0 +1,17 @@
+.main-navigation{
+    color: rgba(46, 44, 44, 0.8);
+}
+
+.brand h1{
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.main-navigation a{
+    color: #000 !important;
+}
+
+.main-navigation a.active{
+    color: rgb(233, 193, 14) !important;
+}
