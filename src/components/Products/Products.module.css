@@ -15,6 +15,6 @@
     margin-bottom: 30px;
 } 
 
-#top-products div > * {
+#top-products div > div {
     padding: 0;
 }

@@ -18,7 +18,8 @@ const Products = () => {
                 id: key,
                 name: data[key].name,
                 img1: data[key].img1,
-                price: parseFloat(data[key].price).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
+                price: parseFloat(data[key].price).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}),
+                short_desc: data[key].short_desc
             })
         }
 
@@ -31,8 +32,8 @@ const Products = () => {
 
     return(
         <section id={classes['top-products']} className={`container`}>
-            <h5>MADE THE HARD WAY</h5>
-            <h3>TOP TRENDING PRODUCTS</h3>
+            <h5 className="row">MADE THE HARD WAY</h5>
+            <h3 className="row">TOP TRENDING PRODUCTS</h3>
             <div className={`${classes["list-product"]} row d-flex justify-content-between`}>
                 {products.map((product, index) => {
                     if(index <= 7){
