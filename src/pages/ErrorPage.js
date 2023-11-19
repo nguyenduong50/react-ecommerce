@@ -1,7 +1,7 @@
 import { useRouteError } from 'react-router-dom';
 import Header from '../components/Header/Header';
 
-import PageContent from '../components/PageContent/PageContent';
+import PageContent from '../components/UI/PageContent/PageContent';
 
 function ErrorPage() {
   const error = useRouteError();

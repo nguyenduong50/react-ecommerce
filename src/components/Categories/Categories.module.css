@@ -28,6 +28,6 @@
 }
 
 #categories img:hover{
-    filter: opacity(65%);
+    filter: opacity(60%) blur(1px);
     cursor: pointer;
 }

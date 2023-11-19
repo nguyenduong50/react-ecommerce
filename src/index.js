@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
