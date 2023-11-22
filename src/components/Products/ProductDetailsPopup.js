@@ -12,10 +12,10 @@ const ProductDetailsPopup = ({product}) => {
     return(
         <div className={classes["product-details-popup"]}>
             <div className="row mx-0">
-                <div className=" col-md-6">
+                <div className="col-md-6 py-3">
                     <img src={product.img1} />
                 </div>
-                <div className="col-md-6 pe-5">
+                <div className="col-md-6 py-5 ps-5 pe-5">
                     <h4>{product.name}</h4>
                     <p>{product.price}</p>
                     <p>{product.short_desc}</p>
@@ -25,7 +25,7 @@ const ProductDetailsPopup = ({product}) => {
                     </button>
                 </div>
             </div>
-            <button className={classes["btn-hide-popup"]} type="button" onClick={() => hidePopupHandler()}>X</button>
+            <button className={classes["btn-hide-popup"]} type="button" onClick={() => hidePopupHandler()}>x</button>
         </div>
     );
 }

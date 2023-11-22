@@ -1,27 +1,18 @@
-import { useNavigate } from 'react-router-dom';
 import classes from './Banner.module.css';
 
-const Banner = () => {
-    const navigate = useNavigate();
-    const shopPageHandler = () => {
-        navigate('/shop');
-    }
-
+const Banner = ({page, pageMap}) => {
     return(
-        <section id={classes.banner} className="container">
-            <div className="row">
-                <div className={`${classes["banner-info"]} col-12`}>
-                    <p className="text-uppercase">
-                        New Inspiration 2020
-                    </p>
-                    <h2 className="text-uppercase">
-                        20% off on new seasion
-                    </h2>
-                    <button className={classes["btn-browse"]} onClick={shopPageHandler}>Browse collections</button>
+        <div className={`${classes.banner} container`}>
+            <div className="row bg-body-secondary py-5">
+                <div className="col-md-6 py-4 ps-5 d-flex align-items-center">
+                    <h3 className="fst-italic ms-4 mb-0 fs-2">{page}</h3>
+                </div>
+                <div className="col-md-1 offset-md-4 py-4 ps-5 d-flex align-items-center">
+                    <p className="fst-italic mb-0 fs-6 text-body-tertiary">{pageMap}</p>
                 </div>
             </div>
-        </section>
-    )
+        </div>
+    );
 }
 
 export default Banner;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLoaderData, useRouteLoaderData } from 'react-router-dom';
 
 import classes from './Products.module.css';
 import {urlProduct} from '../../config/ProductConfig';
@@ -6,12 +7,10 @@ import Product from './Product';
 import Popup from '../UI/Popup/Popup';
 
 const Products = () => {
+    const data = useLoaderData();
     const [products, setProducts] = useState([]);
-
-    const productsFetch = async () => {
-        const response = await fetch(urlProduct);
-        const data = await response.json();
     
+    useEffect(() => {
         let products_tempo = [];
         for(let key in data){
             products_tempo.push({
@@ -24,17 +23,13 @@ const Products = () => {
         }
 
         setProducts(products_tempo);
-    }
-    
-    useEffect(() => {
-        productsFetch();
     }, []);
 
     return(
         <section id={classes['top-products']} className={`container`}>
             <h5 className="row">MADE THE HARD WAY</h5>
             <h3 className="row">TOP TRENDING PRODUCTS</h3>
-            <div className={`${classes["list-product"]} row d-flex justify-content-between`}>
+            <div className={`${classes["list-product"]} row`}>
                 {products.map((product, index) => {
                     if(index <= 7){
                         return(

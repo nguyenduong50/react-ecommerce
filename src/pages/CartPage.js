@@ -1,9 +1,10 @@
 import { Fragment } from "react";
+import Banner from "../components/Banner/Banner";
 
 const CartPage = () => {
     return (
         <Fragment>
-            CartPage
+            <Banner page="CART" pageMap="CART"/>
         </Fragment>
     );
 }

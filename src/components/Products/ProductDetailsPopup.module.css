@@ -14,8 +14,9 @@
     border: none;
     background-color: transparent;
     color: #ccc;
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: 600;
     position: absolute;
-    top: 5px;
+    top: 0px;
     right: 10px;
 }

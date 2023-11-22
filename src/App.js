@@ -8,24 +8,36 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import {loader as loadProducts} from './pages/HomePage';
+import {loader as loadProduct} from './pages/DetailsPage';
+import {action as registerAction} from './pages/RegisterPage';
+import {action as loginAction} from './pages/LoginPage';
+import {action as logoutAction} from './pages/Logout';
+import {loader as loaderProductList} from './pages/ShopPage';
+import {getListUser, checkLoginLoader} from './Util/auth';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
+    id: 'root',
+    loader: checkLoginLoader,
     children: [
       {
         index: true,
-        element: <HomePage />
+        element: <HomePage />,
+        loader: loadProducts
       },
       {
         path: 'shop',
-        element: <ShopPage />
+        element: <ShopPage />,
+        loader: loaderProductList
       },
       {
-        path: 'details',
-        element: <DetailsPage />
+        path: 'details/:productID',
+        element: <DetailsPage />,
+        loader: loadProduct
       },
       {
         path: 'cart',
@@ -37,11 +49,17 @@ const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <LoginPage />
+        element: <LoginPage />,
+        action: loginAction
       },
       {
         path: 'register',
-        element: <RegisterPage />
+        element: <RegisterPage />,
+        action: registerAction
+      },
+      {
+        path: 'logout',
+        action: logoutAction
       },
     ]
   }

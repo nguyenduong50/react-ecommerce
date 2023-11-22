@@ -1,9 +1,10 @@
 import { Fragment } from "react";
+import Banner from "../components/Banner/Banner";
 
 const CheckoutPage = () => {
     return (
         <Fragment>
-            CheckoutPage
+            <Banner page="CHECKOUT" pageMap="CHECKOUT"/>
         </Fragment>
     );
 }
