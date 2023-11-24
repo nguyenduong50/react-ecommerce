@@ -45,12 +45,13 @@ async function loadProduct(id){
 
         for(let key in data){
             if(key === id){
+                dataProduct.id = key;
                 dataProduct.name = data[key].name;
                 dataProduct.img1 = data[key].img1;
                 dataProduct.img2 = data[key].img2;
                 dataProduct.img3 = data[key].img3;
                 dataProduct.img4 = data[key].img4;
-                dataProduct.price = parseFloat(data[key].price).toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                dataProduct.price = parseFloat(data[key].price);
                 dataProduct.short_desc = data[key].short_desc;               
                 dataProduct.category = data[key].category;
                 productDesc = data[key].long_desc.split("\n");

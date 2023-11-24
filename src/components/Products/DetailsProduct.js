@@ -1,6 +1,43 @@
+import { Form, redirect, useRouteLoaderData } from 'react-router-dom';
 import classes from './DatailsProduct.module.css';
+import { useRef, useState } from 'react';
+import {cartActions} from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import Popup from '../UI/Popup/Popup';
 
 const DetailsProduct = ({product}) => {
+    const user = useRouteLoaderData('root');
+    const dispatch = useDispatch();
+    const amountProduct = useRef();
+    
+    const [isPopup, setIsPopup] = useState(false);
+
+    const popupHandler = () => {
+        setIsPopup(!isPopup);
+    }
+
+    const addCartHandler = (event) => {
+        event.preventDefault();
+        const currentUser = JSON.parse(localStorage.getItem('currentUserAssignment3')) ?? "guest";
+
+        if(user.email !== currentUser.email){
+            alert("Please, Reload page!");
+            return redirect("/");
+        }
+
+        dispatch(cartActions.addCart({
+            id: product.dataProduct.id,
+            image: product.dataProduct.img1,
+            name: product.dataProduct.name,
+            price: parseFloat(product.dataProduct.price),
+            amount: parseInt(amountProduct.current.value),
+            totalPrice: parseFloat(product.dataProduct.price) * parseInt(amountProduct.current.value),
+            user: user
+        }));
+
+        popupHandler();
+    }
+
     return(
         <div className={`${classes["details-product"]} container mt-4`}>
             <div className="row">
@@ -17,18 +54,29 @@ const DetailsProduct = ({product}) => {
                 </div>
                 <div className="col-md-6 mt-2 ms-4">
                     <h4 className="fst-italic">{product.dataProduct.name}</h4>
-                    <p className="fst-italic text-secondary mt-3">{product.dataProduct.price}</p>
+                    <p className="fst-italic text-secondary mt-3">{product.dataProduct.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</p>
                     <p className="fst-italic mt-3">{product.dataProduct.short_desc}</p>
                     <div>
                         <span className="fw-bold fst-italic">CATEGORY: </span>
                         <span className="fst-italic">{product.dataProduct.category}</span>
                     </div>
-                    <div className="input-group mt-3 mb-3">
+                    <form onSubmit={addCartHandler} className="input-group mt-3 mb-3">
                         <span className="col-5">
-                            <input type="number" className="form-control rounded-0" placeholder="QUANITY" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                            <input 
+                                type="number" 
+                                className="form-control rounded-0" 
+                                placeholder="QUANITY" 
+                                aria-label="Recipient's username" 
+                                aria-describedby="basic-addon2" 
+                                min="1"
+                                max="5"
+                                step="1"
+                                defaultValue="1"
+                                ref={amountProduct}
+                            />
                         </span>
-                        <span className="input-group-text btn btn-dark rounded-0" id="basic-addon2">Add to cart</span>
-                    </div>
+                        <button className="input-group-text btn btn-dark rounded-0" id="basic-addon2">Add to cart</button>
+                    </form>
                 </div>
             </div>
 
@@ -43,6 +91,18 @@ const DetailsProduct = ({product}) => {
                     </div>
                 </div>
             </div>
+            {
+                isPopup && 
+                <Popup>
+                    <div className="container py-5 px-5 position-relative">
+                        <div className="row py-5 d-flex justify-content-center align-items-center text-center">
+                            <i className="col-2 fa-solid fa-circle-check px-0 fs-1 text-success"></i>
+                            <p className="col-10 fs-3 px-2 py-0 mb-0">Order Success</p>
+                        </div>
+                        <button className="btn btn-primary position-absolute bottom-0 end-0 me-2 mb-2" onClick={popupHandler}>Close</button>
+                    </div>
+                </Popup>
+            }
         </div>
     )
 }

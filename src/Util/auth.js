@@ -4,7 +4,7 @@ export function getListUser(){
 }
 
 export function checkLoginLoader(){
-    const currentUser = JSON.parse(localStorage.getItem('currentUserAssignment3')) ?? "";
-    // console.log(currentUser);
+    const currentUser = JSON.parse(localStorage.getItem('currentUserAssignment3')) ?? "guest";
+
     return currentUser;
 }

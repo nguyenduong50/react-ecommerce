@@ -17,4 +17,5 @@ main{
     background-color: #fff;
     max-width: 1140px !important;
     margin-bottom: 20px;
+    min-height: 65vh;
 }

@@ -27,22 +27,26 @@ export async function action({request}){
     }
 
     //Check Login
+    let currentUser = null;
+
     for(let key in listUser){
       if(data.get('email') === listUser[key].email && data.get('password') === listUser[key].password){
-        const currentUser = {
+        currentUser = {
             email: listUser[key].email,
             fullName: listUser[key].fullName,
             phone: listUser[key].phone          
         };
 
         localStorage.setItem("currentUserAssignment3", JSON.stringify(currentUser));
+      }
+    }
 
-        return redirect('/');
+    if(currentUser === null){
+      return{
+        message: 'Wrong email or password'
       }
-      else{
-        return{
-            message: 'Wrong email or password'
-          }
-      }
+    }
+    else{
+      return redirect("/");
     }
 }

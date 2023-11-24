@@ -29,7 +29,7 @@ const MainNavigation = () => {
             <div className="col-md-4">
                 <ul className="row">
                     {
-                        !currentUser &&
+                        currentUser === "guest" &&
                         <li className="col-md-3 offset-md-5 ps-md-4">
                             <i className="fa-solid fa-cart-shopping me-2 d-none d-lg-inline"></i>
                             <NavLink to="/cart" className={({isActive}) => isActive ? classes.active : undefined}>
@@ -38,8 +38,8 @@ const MainNavigation = () => {
                         </li>
                     }
                     {
-                        currentUser &&
-                        <li className="col-md-3 offset-md-1 ps-md-4">
+                        currentUser !== "guest" &&
+                        <li className="col-md-3 offset-md-3 ps-md-4">
                             <i className="fa-solid fa-cart-shopping me-2 d-none d-lg-inline"></i>
                             <NavLink to="/cart" className={({isActive}) => isActive ? classes.active : undefined}>
                                 Cart
@@ -47,7 +47,7 @@ const MainNavigation = () => {
                         </li>
                     }
                     {
-                        !currentUser &&
+                        currentUser === "guest" &&
                         <li className="col-md-3">
                             <i className="fa-solid fa-user me-2 d-none d-lg-inline"></i>
                             <NavLink to="/login" className={({isActive}) => isActive ? classes.active : undefined}>
@@ -56,10 +56,10 @@ const MainNavigation = () => {
                         </li>
                     }
                     {
-                        currentUser &&
+                        currentUser !== "guest" &&
                         <li className="col-md-3 d-flex align-items-center">
                             <i className="fa-solid fa-user me-2 d-none d-lg-inline"></i>
-                            <span className='me-1'>{currentUser.fullName}</span>
+                            <span className='me-1'>{currentUser.fullName.length < 7 ? currentUser.fullName : currentUser.fullName.slice(0, 6)}</span>
                             {/* <a className="fst-italic ms-1" onClick={logoutHandler}>(Logout)</a> */}
                             <Form action="/logout" method="post">
                                 <button className='fst-italic border-0 bg-white'>(Logout)</button>

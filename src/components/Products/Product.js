@@ -6,7 +6,7 @@ import classes from './Product.module.css';
 import ProductDetailsPopup from './ProductDetailsPopup';
 
 const Product = ({product}) => {
-    const productID = useSelector(state => state.productPopup.productID);
+    const productID = useSelector(state => state.productPopup.productID); 
     const dispatch = useDispatch();
 
     const showPopupHandler = (id) => {
@@ -20,7 +20,7 @@ const Product = ({product}) => {
             <p className="text-center text-body-tertiary fst-italic">{product.price}</p>
             {    
                 productID === product.id &&        
-                <Popup>
+                <Popup width={65}>
                     <ProductDetailsPopup product={product} />
                 </Popup>
             }

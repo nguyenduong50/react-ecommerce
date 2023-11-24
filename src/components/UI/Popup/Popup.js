@@ -1,10 +1,10 @@
 import classes from './Popup.module.css';
 import OverLay from './OverLay';
 
-const Popup = ({children}) => {
+const Popup = ({width, children}) => {
     return(
         <OverLay>
-            <div id={classes["popup"]}>
+            <div id={classes["popup"]} style={{width: `${width}%`}}>
                 {children}
             </div>
         </OverLay>
