@@ -1,12 +1,19 @@
 import {  useDispatch } from 'react-redux';
 import {productPopupActions} from '../../store';
 import classes from './ProductDetailsPopup.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const ProductDetailsPopup = ({product}) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const hidePopupHandler = () => {
         dispatch(productPopupActions.hidePopup());
+    }
+
+    const gotoProductHandler = (index) => {
+        dispatch(productPopupActions.hidePopup());
+        navigate(`/details/${index}`);
     }
 
     return(
@@ -19,7 +26,7 @@ const ProductDetailsPopup = ({product}) => {
                     <h4>{product.name}</h4>
                     <p>{product.price}</p>
                     <p>{product.short_desc}</p>
-                    <button className="btn btn-dark">
+                    <button className="btn btn-dark" type="button" onClick={() => gotoProductHandler(product.id)}>
                         <i className="fa-solid fa-cart-shopping me-2 d-none d-lg-inline"></i>
                         View Details
                     </button>

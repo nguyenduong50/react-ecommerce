@@ -8,9 +8,17 @@ import Popup from '../UI/Popup/Popup';
 const DetailsProduct = ({product}) => {
     const user = useRouteLoaderData('root');
     const dispatch = useDispatch();
-    const amountProduct = useRef();
+    // const amountProduct = useRef();
+    const [amountProduct, setAmountProduct] = useState(1);
     
     const [isPopup, setIsPopup] = useState(false);
+
+    const changeAmount = (amount) => {
+        if(amountProduct <= 1){
+            amount = 1;
+        }
+        setAmountProduct(prevAmount => prevAmount + amount);
+    }
 
     const popupHandler = () => {
         setIsPopup(!isPopup);
@@ -30,8 +38,8 @@ const DetailsProduct = ({product}) => {
             image: product.dataProduct.img1,
             name: product.dataProduct.name,
             price: parseFloat(product.dataProduct.price),
-            amount: parseInt(amountProduct.current.value),
-            totalPrice: parseFloat(product.dataProduct.price) * parseInt(amountProduct.current.value),
+            amount: parseInt(amountProduct),
+            totalPrice: parseFloat(product.dataProduct.price) * parseInt(amountProduct),
             user: user
         }));
 
@@ -61,8 +69,8 @@ const DetailsProduct = ({product}) => {
                         <span className="fst-italic">{product.dataProduct.category}</span>
                     </div>
                     <form onSubmit={addCartHandler} className="input-group mt-3 mb-3">
-                        <span className="col-5">
-                            <input 
+                        <span className="col-5 positon-relative ">
+                            {/* <input 
                                 type="number" 
                                 className="form-control rounded-0" 
                                 placeholder="QUANITY" 
@@ -72,10 +80,26 @@ const DetailsProduct = ({product}) => {
                                 max="5"
                                 step="1"
                                 defaultValue="1"
+                                inputmode="numeric"
                                 ref={amountProduct}
+                            /> */}
+                            <input 
+                                type="text" 
+                                className="form-control rounded-0"  
+                                readOnly
                             />
+                            <label className="fst-italic text-secondary position-absolute top-50 translate-middle-y ps-3 pe-5">QUANTITY</label>
+                            <span className="position-absolute" id={classes["input-amount"]}>
+                                <button className="border-0 bg-white mx-1" type="button" onClick={() => changeAmount(-1)}>
+                                    <i className="fa-solid fa-caret-left"></i>
+                                </button>
+                                <label>{amountProduct}</label> 
+                                <button className="border-0 bg-white mx-1" type="button" onClick={() => changeAmount(1)}>
+                                    <i className="fa-solid fa-caret-right"></i>
+                                </button>
+                            </span>
                         </span>
-                        <button className="input-group-text btn btn-dark rounded-0" id="basic-addon2">Add to cart</button>
+                        <button className="input-group-text btn btn-dark rounded-0" id="basic-addon2" type="submit">Add to cart</button>
                     </form>
                 </div>
             </div>

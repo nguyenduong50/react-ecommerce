@@ -10,3 +10,9 @@
     width: 100%;
     cursor: pointer;
 }
+
+#input-amount{
+    top: 50%;
+    left: 38%;
+    transform: translate(-100%, -50%);
+}
